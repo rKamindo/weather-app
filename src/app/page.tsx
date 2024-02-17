@@ -4,7 +4,7 @@ import axios from "axios";
 import Navbar from "./components/Navbar";
 import { useQuery } from "@tanstack/react-query";
 
-interface WeatherData {
+interface WeatherDetail {
   dt: number;
   main: {
     temp: number;
@@ -39,6 +39,26 @@ interface WeatherData {
   dt_txt: string;
 }
 
+interface WeatherData {
+  cod: string;
+  message: number;
+  cnt: number;
+  list: WeatherDetail[];
+  city: {
+    id: number;
+    name: string;
+    coord: {
+      lat: number;
+      lon: number;
+    };
+    country: string;
+    population: number;
+    timezone: number;
+    sunrise: number;
+    sunset: number;
+  };
+}
+
 export default function Home() {
   const { isLoading, error, data } = useQuery({
     queryKey: ['repoData'],
@@ -63,7 +83,7 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-4 bg-gray-100 min-h-screen">
       <Navbar/>
-
+      
     </div>
   );
 }
